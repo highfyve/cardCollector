@@ -165,7 +165,7 @@
 
 	if (self.cardDetailItem) {
 	    self.detailDescriptionLabel.text	=	[self.cardDetailItem description];
-		self.title							=	[_cardDetailItem signature];
+		self.title							=	[_cardDetailItem personName];
 		[self setupViewForState:_currentCardState];
 	}
 	

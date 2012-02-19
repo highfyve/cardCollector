@@ -82,11 +82,11 @@
 			break;
 		case cardCreatorCreationStepFinished:
 			break;
-		case cardCreatorCreationStepAddSignature:
+		case cardCreatorCreationStepAddPersonName:
 			self.navigationItem.rightBarButtonItem.enabled = FALSE;
 			_cardLabel.text	=	NSLocalizedString(@"let them know it was you!", @"sign card on step three");
-			[UIView animateWithDuration:.75 animations:^{_signatureField.alpha = 1;} completion:^(BOOL completed){
-				[_signatureField becomeFirstResponder];
+			[UIView animateWithDuration:.75 animations:^{_personNameField.alpha = 1;} completion:^(BOOL completed){
+				[_personNameField becomeFirstResponder];
 			}];
 			break;
 	}
@@ -188,9 +188,9 @@
     
 	[self.view addSubview:_activateSwypButton];
 
-	[_signatureField setAlpha:0];
-	[_signatureField setHidden:FALSE];
-	[_signatureField setDelegate:self];
+	[_personNameField setAlpha:0];
+	[_personNameField setHidden:FALSE];
+	[_personNameField setDelegate:self];
 	
 	
 	
@@ -225,7 +225,7 @@
 		}
 	}else if (_currentStep == cardCreatorCreationStepAddInside){
 		if (_cardInCreation.coverImage != nil){
-			_currentStep = cardCreatorCreationStepAddSignature;
+			_currentStep = cardCreatorCreationStepAddPersonName;
 			[self transitionToStep:_currentStep];
 		}
 	}
@@ -269,7 +269,7 @@
 
 -(void)dealloc{
 	
-	if (_currentStep < cardCreatorCreationStepAddSignature){
+	if (_currentStep < cardCreatorCreationStepAddPersonName){
 		[_objectContext deleteObject:_cardInCreation];
 //		[_delegate cardCreator:self didFinishWithCard:nil];
 	}
@@ -282,8 +282,8 @@
 	
 	_cardLabel					= nil;
 	_cardImageView					= nil;
-	[_signatureField setDelegate:nil];
-	_signatureField				= nil;
+	[_personNameField setDelegate:nil];
+	_personNameField				= nil;
 	
 	[_activateSwypButton removeFromSuperview];
 	_activateSwypButton			= nil;
@@ -291,7 +291,7 @@
 
 #pragma mark - delegation
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField{
-	if (textField != _signatureField)
+	if (textField != _personNameField)
 		return TRUE;
 		
 	if (StringHasText([textField text])){
@@ -302,7 +302,7 @@
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-	if (textField != _signatureField)
+	if (textField != _personNameField)
 		return TRUE;
 	
 	if (StringHasText([textField text])){
@@ -312,11 +312,11 @@
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField{
-	if (textField != _signatureField)
+	if (textField != _personNameField)
 		return;
-	if(_currentStep == cardCreatorCreationStepAddSignature){
+	if(_currentStep == cardCreatorCreationStepAddPersonName){
 		_currentStep = cardCreatorCreationStepFinished;
-		[_cardInCreation setSignature:[textField text]];
+		[_cardInCreation setPersonName:[textField text]];
 		[_delegate cardCreator:self didFinishWithCard:_cardInCreation];
 	}
 
@@ -401,7 +401,7 @@
 				}
 			}else if (_currentStep == cardCreatorCreationStepAddInside){
 				if (_cardInCreation.coverImage != nil){
-					_currentStep = cardCreatorCreationStepAddSignature;
+					_currentStep = cardCreatorCreationStepAddPersonName;
 					[self transitionToStep:_currentStep];
 				}
 			}	

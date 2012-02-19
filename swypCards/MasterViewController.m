@@ -332,7 +332,7 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     Card *managedCard = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text			= [managedCard signature];
+    cell.textLabel.text			= [managedCard personName];
 	cell.textLabel.font			= [UIFont fontWithName:@"BradleyHandITCTT-Bold" size:20];
 	cell.detailTextLabel.text	= [[managedCard timeStamp] formatAsShortString];
 }

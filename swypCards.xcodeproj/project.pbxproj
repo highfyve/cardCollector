@@ -90,10 +90,10 @@
 		7902D6E514D4B82000C71731 /* DetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
 		7902D6E814D4B82000C71731 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPhone.xib; sourceTree = "<group>"; };
 		7902D6EB14D4B82000C71731 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MasterViewController_iPad.xib; sourceTree = "<group>"; };
-		7902D6FA14D4FE0F00C71731 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Card.h; sourceTree = "<group>"; };
+		7902D6FA14D4FE0F00C71731 /* Card.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = Card.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
 		7902D6FB14D4FE0F00C71731 /* Card.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Card.m; sourceTree = "<group>"; };
 		7902D70314D4FF9800C71731 /* cardCreatorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = cardCreatorViewController.h; sourceTree = "<group>"; };
-		7902D70414D4FF9800C71731 /* cardCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = cardCreatorViewController.m; sourceTree = "<group>"; };
+		7902D70414D4FF9800C71731 /* cardCreatorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = cardCreatorViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		7902D74D14D5018600C71731 /* exoNSDateAddtions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = exoNSDateAddtions.h; sourceTree = "<group>"; };
 		7902D74E14D5018600C71731 /* exoNSDateAddtions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = exoNSDateAddtions.m; sourceTree = "<group>"; };
 		7902D75A14D5023500C71731 /* swypPhotosHud.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = swypPhotosHud.png; sourceTree = "<group>"; };

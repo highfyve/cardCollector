@@ -20,7 +20,7 @@
 typedef enum{
 	cardCreatorCreationStepAddCover = 0,	
 	cardCreatorCreationStepAddInside,
-	cardCreatorCreationStepAddSignature,
+	cardCreatorCreationStepAddPersonName,
 	cardCreatorCreationStepFinished
 }cardCreatorCreationStep;
 
@@ -38,7 +38,7 @@ typedef enum{
 	//view components
 	IBOutlet UILabel *				_cardLabel;
 	IBOutlet UIImageView *			_cardImageView;
-	IBOutlet UITextField *			_signatureField;
+	IBOutlet UITextField *			_personNameField;
 	
 	UIButton *						_activateSwypButton;
 	
