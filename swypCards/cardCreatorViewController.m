@@ -84,7 +84,7 @@
 			break;
 		case cardCreatorCreationStepAddPersonName:
 			self.navigationItem.rightBarButtonItem.enabled = FALSE;
-			_cardLabel.text	=	NSLocalizedString(@"let them know it was you!", @"sign card on step three");
+			_cardLabel.text	=	NSLocalizedString(@"Add your name!", @"sign card on step three");
 			[UIView animateWithDuration:.75 animations:^{_personNameField.alpha = 1;} completion:^(BOOL completed){
 				[_personNameField becomeFirstResponder];
 			}];
