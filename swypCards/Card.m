@@ -15,6 +15,7 @@
 @dynamic thumbnailImage;
 @dynamic timeStamp;
 @dynamic wasReceived;
+@dynamic cardData;
 
 @synthesize personName = _personName, personRank = _personRank, personImage;
 
@@ -25,28 +26,27 @@
 
 
 -(void) setPersonImage:(UIImage *)image{
-	[self setItemPreviewImage:UIImageJPEGRepresentation(image, .8)];
+	[self setThumbnailImage:UIImageJPEGRepresentation(image, .8)];
 }
 
 -(void) awakeFromFetch{
 	[super awakeFromFetch];
-	[self loadFromObjData];
+	[self setValuesFromSerializedData:[self cardData]];
 }
 
 -(void) setPersonName:(NSString *)personName{
 	_personName = personName;
-	[self saveToObjData];
+	[self setCardData:[self serializedDataValue]];
 }
 
 -(void) setPersonRank:(NSNumber *)personRank{
 	_personRank = personRank;
-	[self saveToObjData];
+	[self setCardData:[self serializedDataValue]];
 }
 
 
 -(NSData*)serializedDataValue{
 	NSDictionary * saveDict		= [NSMutableDictionary dictionary];
-//	[saveDict setValue:[self personImage] forKey:@"personImage"];
 	[saveDict setValue:[self personName] forKey:@"personName"];
 	[saveDict setValue:[self personRank] forKey:@"personRank"];
 	NSData * archive	=	[NSKeyedArchiver archivedDataWithRootObject:allCommittedValues];

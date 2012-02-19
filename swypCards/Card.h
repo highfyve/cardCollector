@@ -17,6 +17,7 @@
 
 @property (nonatomic, retain) NSData * coverImage;
 @property (nonatomic, retain) NSData * insideImage;
+@property (nonatomic, retain) NSData * cardData;
 @property (nonatomic, retain) NSString * signature;
 @property (nonatomic, retain) NSData * thumbnailImage;
 @property (nonatomic, retain) NSDate * timeStamp;
