@@ -10,6 +10,11 @@
 #import <CoreData/CoreData.h>
 
 @interface Card : NSManagedObject
+
+@property (nonatomic, strong)	NSString * personName;
+@property (nonatomic, strong)	NSNumber * personRank;
+@property (nonatomic, strong)	UIImage * personImage;
+
 @property (nonatomic, retain) NSData * coverImage;
 @property (nonatomic, retain) NSData * insideImage;
 @property (nonatomic, retain) NSString * signature;
