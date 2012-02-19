@@ -239,6 +239,8 @@
     // Edit the entity name as appropriate.
     NSEntityDescription *entity = [NSEntityDescription entityForName:@"Card" inManagedObjectContext:self.managedObjectContext];
     [fetchRequest setEntity:entity];
+	
+	[fetchRequest setPredicate:[NSPredicate predicateWithFormat:@"cardShareCount > 0"]];
     
     // Set the batch size to a suitable number.
     [fetchRequest setFetchBatchSize:20];

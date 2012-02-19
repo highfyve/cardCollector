@@ -384,6 +384,7 @@
 		[_cardDetailItem setThumbnailImage:UIImageJPEGRepresentation(thumbnail, .8)];
 	}else{
 		thumbnail	=	[UIImage imageWithData:[_cardDetailItem thumbnailImage]];
+		[_cardDetailItem setCardShareCount:[NSNumber numberWithInt:[[_cardDetailItem cardShareCount] intValue]-1]];
 	}
 	return thumbnail;
 }

@@ -15,12 +15,13 @@
 @dynamic thumbnailImage;
 @dynamic timeStamp;
 @dynamic wasReceived;
-@dynamic personRank, personName, personImage;
+@dynamic personRank, personName, personImage, cardShareCount;
 
 
 -(void) awakeFromInsert{
 	[super awakeFromInsert];
 	self.timeStamp	=	[NSDate date];
+	self.cardShareCount	=	[NSNumber numberWithInt:2];
 }
 
 

@@ -14,10 +14,10 @@
 @property (nonatomic, strong)	NSString * personName;
 @property (nonatomic, strong)	NSNumber * personRank;
 @property (nonatomic, strong)	UIImage * personImage;
+@property (nonatomic, retain) NSNumber * cardShareCount;
 
 @property (nonatomic, retain) NSData * coverImage;
 @property (nonatomic, retain) NSData * insideImage;
-@property (nonatomic, retain) NSData * cardData;
 @property (nonatomic, retain) NSString * signature;
 @property (nonatomic, retain) NSData * thumbnailImage;
 @property (nonatomic, retain) NSDate * timeStamp;

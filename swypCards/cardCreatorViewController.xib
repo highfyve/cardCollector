@@ -91,7 +91,6 @@
 						<string key="NSFrame">{{79, 125}, {162, 31}}</string>
 						<reference key="NSSuperview" ref="701376015"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:304</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -165,19 +164,19 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">_signatureField</string>
-						<reference key="source" ref="372490531"/>
-						<reference key="destination" ref="866440188"/>
-					</object>
-					<int key="connectionID">11</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">_cardImageView</string>
 						<reference key="source" ref="372490531"/>
 						<reference key="destination" ref="384049885"/>
 					</object>
 					<int key="connectionID">12</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">_personNameField</string>
+						<reference key="source" ref="372490531"/>
+						<reference key="destination" ref="866440188"/>
+					</object>
+					<int key="connectionID">13</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -240,7 +239,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">12</int>
+			<int key="maxID">13</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -250,7 +249,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="_cardImageView">UIImageView</string>
 						<string key="_cardLabel">UILabel</string>
-						<string key="_signatureField">UITextField</string>
+						<string key="_personNameField">UITextField</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="_cardImageView">
@@ -261,8 +260,8 @@
 							<string key="name">_cardLabel</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="_signatureField">
-							<string key="name">_signatureField</string>
+						<object class="IBToOneOutletInfo" key="_personNameField">
+							<string key="name">_personNameField</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
 					</dictionary>
