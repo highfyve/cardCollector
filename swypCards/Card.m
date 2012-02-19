@@ -16,7 +16,7 @@
 @dynamic timeStamp;
 @dynamic wasReceived;
 
-@synthesize personName, personRank, personImage;
+@synthesize personName = _personName, personRank = _personRank, personImage;
 
 -(void) awakeFromInsert{
 	[super awakeFromInsert];
