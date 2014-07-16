@@ -8,26 +8,37 @@
 
 #import <UIKit/UIKit.h>
 #import "Card.h"
+#import <CoreMotion/CoreMotion.h>
 
 typedef enum{
 	cardViewStateCover,
 	cardViewStateInside
 }cardViewState;
 
-@interface DetailViewController : UIViewController <UISplitViewControllerDelegate,swypContentDataSourceProtocol, swypConnectionSessionDataDelegate, swypSwypableContentSuperviewContentDelegate>{
+@interface DetailViewController : UIViewController <UIActionSheetDelegate, UISplitViewControllerDelegate,swypContentDataSourceProtocol, swypConnectionSessionDataDelegate, swypSwypableContentSuperviewContentDelegate>{
 	
 	__weak id<swypContentDataSourceDelegate>	_delegate;
 	
 	cardViewState				_currentCardState;
 	
-	IBOutlet UIImageView *		_cardImageView;
 	IBOutlet UILabel *			_cardLabel;
 	
 	UIButton *						_activateSwypButton;
 	
 	swypWorkspaceViewController*	_swypWorkspace;
 	NSManagedObjectContext *		_objectContext;
+    
+    
+    UIDynamicAnimator * animator;
 }
+
+@property (nonatomic, strong) UIDynamicAnimator* animator;
+@property (nonatomic, strong) UIGravityBehavior* gravity;
+@property (nonatomic, strong) UICollisionBehavior * boundaryCollision;
+@property (nonatomic, strong) CMMotionManager * motionManager;
+
+@property (nonatomic, strong) IBOutlet UIImageView *		cardImageView;
+
 
 -(id) initWithSwypWorkspace:(swypWorkspaceViewController*)workspace managedObjectContext:(NSManagedObjectContext*)context;
 

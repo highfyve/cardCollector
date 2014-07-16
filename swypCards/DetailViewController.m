@@ -23,6 +23,31 @@
 @synthesize swypWorkspace = _swypWorkspace;
 
 
+#pragma mark DYNAMIX
+-(void) setupDynamicBehavior{
+    self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
+    self.gravity = [[UIGravityBehavior alloc] initWithItems:@[self.cardImageView]];
+    self.boundaryCollision = [[UICollisionBehavior alloc] initWithItems:@[self.cardImageView]];
+    self.boundaryCollision.translatesReferenceBoundsIntoBoundary = YES;//the walls just seem to cause crashes, but give feeling to the experience
+        
+    [self.animator addBehavior:self.boundaryCollision];
+    [self.animator addBehavior:self.gravity];
+    
+    
+    __weak DetailViewController * weakDetail = self;
+    self.motionManager = [[CMMotionManager alloc] init];
+    [self.motionManager startDeviceMotionUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMDeviceMotion *motion, NSError *error) {
+        CMAcceleration gravity = motion.gravity;
+        dispatch_async(dispatch_get_main_queue(), ^{
+            weakDetail.gravity.gravityDirection = CGVectorMake(gravity.x, -gravity.y);
+        });
+    }];
+   
+}
+
+
+
+
 #pragma mark - User Interface Cruft
 -(void) activateSwypButtonPressed:(id)sender{
 	[_swypWorkspace presentContentWorkspaceAtopViewController:self];
@@ -218,11 +243,44 @@
 	swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
 	[_activateSwypButton addGestureRecognizer:swipeUpRecognizer];
 	
+    
+	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(exportPhotosButtonPressed:)]];
+    
 	[self.view addSubview:_activateSwypButton];
-
 	
 	[self configureView];
+    
+    [self setupDynamicBehavior];
 }
+
+-(void)exportPhotosButtonPressed:(id)sender{
+    
+	UIActionSheet * sheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:nil destructiveButtonTitle:nil otherButtonTitles:NSLocalizedString(@"Save Images", @"Card Creator"), nil];
+	
+	[sheet addButtonWithTitle:NSLocalizedString(@"Cancel", @"UIAlertView hide")];
+	[sheet setCancelButtonIndex:[sheet numberOfButtons]-1];
+    
+	if (deviceIsPad){
+		[sheet showFromBarButtonItem:self.navigationItem.rightBarButtonItem animated:NO];
+	}else{
+		[sheet showInView:self.view];
+	}
+}
+
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex{
+		NSUInteger buttonCount	=	[actionSheet numberOfButtons];
+	if (buttonIndex +1 == buttonCount){
+		return;
+	}
+
+    NSData * jpegFront = self.cardDetailItem.coverImage;
+    NSData * jpegInside = self.cardDetailItem.insideImage;
+    
+    UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:jpegFront], nil, nil, nil);
+    UIImageWriteToSavedPhotosAlbum([UIImage imageWithData:jpegInside], nil, nil, nil);
+    
+}
+
 
 
 #pragma mark - View lifecycle
@@ -364,7 +422,7 @@
             abort();
         } 	
 		
-		[self dismissModalViewControllerAnimated:TRUE];
+		[self dismissViewControllerAnimated:true completion:nil];
 	}
 }
 

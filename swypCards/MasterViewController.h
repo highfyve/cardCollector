@@ -13,12 +13,13 @@
 
 #import <CoreData/CoreData.h>
 
-@interface MasterViewController : UITableViewController <NSFetchedResultsControllerDelegate, cardCreatorViewControllerDelegate, swypContentDataSourceProtocol, swypConnectionSessionDataDelegate>{
+@interface MasterViewController : UIViewController <NSFetchedResultsControllerDelegate, cardCreatorViewControllerDelegate, swypContentDataSourceProtocol, swypConnectionSessionDataDelegate>{
 	swypWorkspaceViewController *	_swypWorkspace;
 	
 	UIButton *	_iPhoneModeSwypPromptButton;
 }
 @property (nonatomic, readonly) swypWorkspaceViewController * swypWorkspace;
+@property (nonatomic, strong) IBOutlet UITableView * tableView;
 
 @property (strong, nonatomic) DetailViewController *detailViewController;
 

@@ -42,6 +42,7 @@
 -(UIImagePickerController*)imagePickerController{
 	if (_imagePickerController == nil){
 		_imagePickerController = [[UIImagePickerController alloc] init];
+        [_imagePickerController setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
 		[_imagePickerController setDelegate:self];
 	}
 	return _imagePickerController;
@@ -192,9 +193,11 @@
 	[_personNameField setHidden:FALSE];
 	[_personNameField setDelegate:self];
 	
+    
+    UITapGestureRecognizer * tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedOnImageView:)];
+	[_cardImageView addGestureRecognizer:tapRecognizer];
 	
-	
-	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(addPhotoButtonTapped:)]];
+//	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(addPhotoButtonTapped:)]];
 	
 	[self setTitle:NSLocalizedString(@"New Card", @"On card creator")];
 	
@@ -343,10 +346,10 @@
 		return;
 	switch (_currentStep) {
 		case cardCreatorCreationStepAddCover:
-			[_cardInCreation setCoverImage:UIImageJPEGRepresentation(imageReceived, .9)];
+			[_cardInCreation setCoverImage:UIImageJPEGRepresentation(imageReceived, .8)];
 			break;
 		case cardCreatorCreationStepAddInside:
-			[_cardInCreation setInsideImage:UIImageJPEGRepresentation(imageReceived, .9)];
+			[_cardInCreation setInsideImage:UIImageJPEGRepresentation(imageReceived, .8)];
 			break;
 		default:
 			break;
@@ -374,14 +377,17 @@
 		[self dismissModalViewControllerAnimated:TRUE];
 	}
 	
+    UIImage * maxSizedImage = [self constrainImage:selectedImage toSize:CGSizeMake(1000, 1000)];
+    
+    
 	if (selectedImage == nil)
 		return;
 	switch (_currentStep) {
 		case cardCreatorCreationStepAddCover:
-			[_cardInCreation setCoverImage:UIImageJPEGRepresentation(selectedImage, .9)];
+			[_cardInCreation setCoverImage:UIImageJPEGRepresentation(maxSizedImage, .8)];
 			break;
 		case cardCreatorCreationStepAddInside:
-			[_cardInCreation setInsideImage:UIImageJPEGRepresentation(selectedImage, .9)];
+			[_cardInCreation setInsideImage:UIImageJPEGRepresentation(maxSizedImage, .8)];
 
 			break;
 			
@@ -414,7 +420,23 @@
 	if (_imagePickerPopover){
 		[_imagePickerPopover dismissPopoverAnimated:TRUE];
 	}else{
-		[self dismissModalViewControllerAnimated:TRUE];
+		[self dismissViewControllerAnimated:true completion:nil];
+	}
+}
+
+-(void)tappedOnImageView:(UITapGestureRecognizer*)tapper{
+    if (deviceIsPad){
+		if (_imagePickerPopover == nil){
+			_imagePickerPopover = [[UIPopoverController alloc] initWithContentViewController:[self imagePickerController]];
+		}
+		
+		if ([_imagePickerPopover isPopoverVisible]){
+			[_imagePickerPopover dismissPopoverAnimated:TRUE];
+		}else{
+			[_imagePickerPopover presentPopoverFromBarButtonItem:self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:FALSE];
+		}
+	}else{
+		[self presentViewController:[self imagePickerController]  animated:true completion:nil];
 	}
 }
 

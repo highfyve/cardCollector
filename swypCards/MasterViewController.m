@@ -42,7 +42,7 @@
     if (self) {
 		self.title = NSLocalizedString(@"Cards", @"Cards");
 		if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
-		    self.clearsSelectionOnViewWillAppear = NO;
+//		    self.tableView.clearsSelectionOnViewWillAppear = NO;
 		    self.contentSizeForViewInPopover = CGSizeMake(320.0, 600.0);
 		}
     }
@@ -62,7 +62,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 	// Set up the edit and add buttons.
-	self.navigationItem.leftBarButtonItem = self.editButtonItem;
+//	self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
 	UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(newCardButtonPressed)];
 	self.navigationItem.rightBarButtonItem = addButton;
@@ -81,6 +81,8 @@
 		
 		[self.view addSubview:_iPhoneModeSwypPromptButton];
 //		[self.tableView setTableFooterView:_iPhoneModeSwypPromptButton];
+        [[self.swypWorkspace contentManager] setContentDataSource:self];
+
 	}
 	
 }
@@ -387,7 +389,7 @@
 }
 
 -(void)	delegateShouldDismissSwypWorkspace: (swypWorkspaceViewController*)workspace{
-	[workspace dismissModalViewControllerAnimated:TRUE];
+	[workspace dismissViewControllerAnimated:true completion:nil];
 }
 
 #pragma mark swypConnectionSessionDataDelegate
@@ -417,7 +419,7 @@
             abort();
         } 	
 		
-		[self dismissModalViewControllerAnimated:TRUE];
+		[self dismissViewControllerAnimated:true completion:nil];
 	}
 }
 
