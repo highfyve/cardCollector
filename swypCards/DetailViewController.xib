@@ -8,6 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DetailViewController">
             <connections>
                 <outlet property="_cardLabel" destination="6" id="9"/>
+                <outlet property="anchorImageView" destination="0A1-RO-Vyv" id="JgF-Rx-KkE"/>
                 <outlet property="cardImageView" destination="5" id="Cdz-yL-dtS"/>
                 <outlet property="view" destination="3" id="7"/>
             </connections>
@@ -17,22 +18,44 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" ambiguous="YES" misplaced="YES" text="tap to open" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                    <rect key="frame" x="20" y="30" width="280" height="45"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0A1-RO-Vyv">
+                    <rect key="frame" x="148" y="82" width="25" height="25"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="Tnw-qF-XNT"/>
+                        <constraint firstAttribute="width" constant="25" id="XHd-CE-Mwi"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="tap to open" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" minimumFontSize="10" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+                    <rect key="frame" x="20" y="109" width="280" height="45"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="280" id="gTr-SP-hhk"/>
+                        <constraint firstAttribute="height" constant="45" id="l2l-Tf-zNE"/>
+                    </constraints>
                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                     <color key="textColor" red="0.45652173909999999" green="0.45652173909999999" blue="0.45652173909999999" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                     <size key="shadowOffset" width="-1" height="-1"/>
                 </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                    <rect key="frame" x="35" y="83" width="250" height="321.5"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+                    <rect key="frame" x="35" y="162" width="250" height="150"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="150" id="Qud-gz-HDe"/>
+                        <constraint firstAttribute="width" constant="250" id="n1o-Ui-tNE"/>
+                    </constraints>
                 </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="5" firstAttribute="top" secondItem="6" secondAttribute="bottom" constant="8" id="1lq-vw-xfw"/>
+                <constraint firstAttribute="centerX" secondItem="0A1-RO-Vyv" secondAttribute="centerX" constant="-0.5" id="3ZM-Xw-Gvw"/>
+                <constraint firstAttribute="centerX" secondItem="5" secondAttribute="centerX" id="A4u-cM-k0L"/>
+                <constraint firstAttribute="centerX" secondItem="6" secondAttribute="centerX" id="Hsw-gu-yAM"/>
+                <constraint firstItem="5" firstAttribute="top" secondItem="0A1-RO-Vyv" secondAttribute="bottom" constant="55" id="itt-pC-F1a"/>
+                <constraint firstItem="0A1-RO-Vyv" firstAttribute="top" secondItem="3" secondAttribute="top" constant="82" id="z9I-Yl-eQv"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
         </view>

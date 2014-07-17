@@ -28,9 +28,16 @@
     self.animator = [[UIDynamicAnimator alloc] initWithReferenceView:self.view];
     self.gravity = [[UIGravityBehavior alloc] initWithItems:@[self.cardImageView]];
     self.boundaryCollision = [[UICollisionBehavior alloc] initWithItems:@[self.cardImageView]];
-    self.boundaryCollision.translatesReferenceBoundsIntoBoundary = YES;//the walls just seem to cause crashes, but give feeling to the experience
-        
-    [self.animator addBehavior:self.boundaryCollision];
+//    self.boundaryCollision.translatesReferenceBoundsIntoBoundary = YES;//the walls just seem to cause crashes, but give feeling to the experience
+    [self.boundaryCollision addBoundaryWithIdentifier:@"top" fromPoint:CGPointMake(-2000, 0) toPoint:CGPointMake(2000, 0)];
+    
+    self.stringAttachment = [[UIAttachmentBehavior alloc]initWithItem:self.cardImageView offsetFromCenter:UIOffsetMake(0, -100) attachedToItem:self.anchorImageView offsetFromCenter:UIOffsetZero];
+    [self.stringAttachment setDamping:0];
+    
+    [self.animator addBehavior:[[UIAttachmentBehavior alloc] initWithItem:self.anchorImageView attachedToAnchor:self.anchorImageView.center]];
+    
+    [self.animator addBehavior:self.stringAttachment];
+//    [self.animator addBehavior:self.boundaryCollision];
     [self.animator addBehavior:self.gravity];
     
     
@@ -39,7 +46,7 @@
     [self.motionManager startDeviceMotionUpdatesToQueue:[[NSOperationQueue alloc] init] withHandler:^(CMDeviceMotion *motion, NSError *error) {
         CMAcceleration gravity = motion.gravity;
         dispatch_async(dispatch_get_main_queue(), ^{
-            weakDetail.gravity.gravityDirection = CGVectorMake(gravity.x, -gravity.y);
+            weakDetail.gravity.gravityDirection = CGVectorMake(gravity.x/5, -gravity.y + .2);
         });
     }];
    
@@ -229,9 +236,14 @@
 	UITapGestureRecognizer * recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureChanged:)];
 	[recognizer setNumberOfTapsRequired:1];
 	[_cardImageView addGestureRecognizer:recognizer];
+    
+    UIPanGestureRecognizer * pullCordRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(cardImageViewPanned:)];
+	[_cardImageView addGestureRecognizer:pullCordRecognizer];
+    
 	[_cardImageView setUserInteractionEnabled:TRUE];
 	
-	
+	[self.anchorImageView.layer setCornerRadius:12];
+    
 	_activateSwypButton	=	[UIButton buttonWithType:UIButtonTypeCustom];
 	UIImage *	swypActivateImage	=	[UIImage imageNamed:@"swypButton"];
 	[_activateSwypButton setBackgroundImage:swypActivateImage forState:UIControlStateNormal];
@@ -239,10 +251,11 @@
 	[self frameActivateButtonWithSize:swypActivateImage.size];
 	[_activateSwypButton addTarget:self action:@selector(activateSwypButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
 	
+
 	UISwipeGestureRecognizer *swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(activateSwypButtonPressed:)];
 	swipeUpRecognizer.direction = UISwipeGestureRecognizerDirectionUp;
 	[_activateSwypButton addGestureRecognizer:swipeUpRecognizer];
-	
+    
     
 	[self.navigationItem setRightBarButtonItem:[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(exportPhotosButtonPressed:)]];
     
@@ -251,6 +264,28 @@
 	[self configureView];
     
     [self setupDynamicBehavior];
+}
+
+-(void)cardImageViewPanned:(UIPanGestureRecognizer*)panner{
+    if (panner.state == UIGestureRecognizerStateBegan){
+        [self.pullOnImageAttachment setAnchorPoint:[panner locationInView:self.view]];
+        
+        [self.animator addBehavior:self.pullOnImageAttachment];
+    }else
+        [self.pullOnImageAttachment setAnchorPoint:[panner locationInView:self.view]];
+    if (panner.state == UIGestureRecognizerStateChanged){
+        
+    }else if (panner.state == UIGestureRecognizerStateEnded){
+        [self.animator removeBehavior:self.pullOnImageAttachment];
+        
+    }
+}
+
+-(UIAttachmentBehavior*)pullOnImageAttachment{
+    if (_pullOnImageAttachment == nil){
+        _pullOnImageAttachment = [[UIAttachmentBehavior alloc] initWithItem:self.cardImageView attachedToAnchor:CGPointZero];
+    }
+    return _pullOnImageAttachment;
 }
 
 -(void)exportPhotosButtonPressed:(id)sender{

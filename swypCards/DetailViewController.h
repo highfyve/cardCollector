@@ -35,9 +35,12 @@ typedef enum{
 @property (nonatomic, strong) UIDynamicAnimator* animator;
 @property (nonatomic, strong) UIGravityBehavior* gravity;
 @property (nonatomic, strong) UICollisionBehavior * boundaryCollision;
+@property (nonatomic, strong) UIAttachmentBehavior * stringAttachment;
+@property (nonatomic, strong) UIAttachmentBehavior * pullOnImageAttachment;
 @property (nonatomic, strong) CMMotionManager * motionManager;
 
 @property (nonatomic, strong) IBOutlet UIImageView *		cardImageView;
+@property (weak, nonatomic) IBOutlet UIView *anchorImageView;
 
 
 -(id) initWithSwypWorkspace:(swypWorkspaceViewController*)workspace managedObjectContext:(NSManagedObjectContext*)context;
